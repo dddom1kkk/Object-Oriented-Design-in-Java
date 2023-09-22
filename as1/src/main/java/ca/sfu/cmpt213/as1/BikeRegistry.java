@@ -39,14 +39,14 @@ public class BikeRegistry {
         sortByID.addAll(bikeList);
 
         System.out.println("\n******************\n* List of Bikes: *\n******************");
-        System.out.printf("%-3s %-20s %-10s %-11s %-8s %-10s%n", "ID", "Owner,", "Type,", "Serial,", "Brake,",
+        System.out.printf("%-3s %-22s %-10s %-11s %-8s %-10s%n", "ID", "Owner,", "Type,", "Serial,", "Brake,",
                 "Wheel Size");
 
         for (int i = 0; i < bikeList.size(); i++) {
 
             bike = sortByID.poll();
 
-            System.out.printf("%-3d %-20s %-10s %-11s %-8s %-10d%n", bike.getID(), bike.getOwner(), bike.getBikeType(),
+            System.out.printf("%-3d %-22s %-10s %-11s %-8s %-10d%n", bike.getID(), bike.getOwner(), bike.getBikeType(),
                     bike.getSerialNumber(), bike.getBrakeType(), bike.getWheelSize());
         }
 
@@ -59,7 +59,6 @@ public class BikeRegistry {
         Scanner optionIn = new Scanner(System.in);
         Bike newBike = new Bike();
         putID(bikeList, newBike);
-        int takeInt;
 
         System.out.print("Enter Bike owner name: ");
         newBike.setOwner(optionIn.nextLine());
@@ -283,6 +282,13 @@ public class BikeRegistry {
             System.out.print("Enter Bike's brake type: ");
             ans = optionIn.next();
         }
+
+        if (ans.equals("disc"))
+            ans = "Disc";
+        else if (ans.equals("drum"))
+            ans = "Drum";
+        else if (ans.equals("rim"))
+            ans = "Rim";
 
         return ans;
 
