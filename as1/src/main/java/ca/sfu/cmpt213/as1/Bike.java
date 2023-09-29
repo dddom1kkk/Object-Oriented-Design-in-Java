@@ -1,7 +1,11 @@
 package ca.sfu.cmpt213.as1;
 
 /**
- * BikeRegistry
+ * The Bike class represents bike instances. All bike instances are used to
+ * register in the system in {@link BikeRegistry} class.
+ * 
+ * @author Damir Zharikessov
+ * @version 1.0
  */
 public class Bike {
 

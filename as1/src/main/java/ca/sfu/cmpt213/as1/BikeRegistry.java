@@ -4,6 +4,13 @@ import java.io.*;
 import java.util.*;
 import ca.sfu.cmpt213.as1.Bike;
 
+/**
+ * The BikeRegistry class represents bike managing and registration system. All
+ * {@link Bike} class instances are used to register bikes in the system.
+ * 
+ * @author Damir Zharikessov
+ * @version 1.0
+ */
 public class BikeRegistry {
 
     private static Integer displayMainMenu() {
