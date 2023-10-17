@@ -5,54 +5,101 @@ import java.util.ArrayList;
 public class TeamSorter {
 
     private JsonTTeam[] allTokimons;
+    private int numOfTeams;
 
     public TeamSorter(JsonTTeam[] allTokis) {
         this.allTokimons = allTokis;
     }
 
-    public int countTeams() {
-        int num = 0;
-        ArrayList<Integer> check = new ArrayList<Integer>();
-        String parse = "";
-        String team = allTokimons[0].getTeam().get(0).getId();
-        int i = 0, j = 0;
-        for (int k = 0; k < team.length(); k++) {
+    private void checkError() {
+        ArrayList<ArrayList<String>> ids = new ArrayList<>();
+        ArrayList<String> id;
 
-            if (k < team.length() - 2 && team.charAt(k) == '-' && team.charAt(k + 1) == 't') {
-                k = k + 2;
+        int check = 0, equal = 0;
 
-                while (team.charAt(k) >= '0' && team.charAt(k) <= '9') {
-                    parse += team.charAt(k);
-                    k++;
+        for (JsonTTeam fileTeam : allTokimons) {
+
+            id = new ArrayList<>();
+
+            for (Tokimon toki : fileTeam.getTeam()) {
+
+                if (id.contains(toki.getId())) {
+                    System.out.println("Error: Same identifier in one file");
+                    System.exit(-1);
                 }
 
-                if (parse.isEmpty()) {
-                    System.out.println("Error: No team identified");
-                    return -1;
-                } else {
-                    num = Integer.parseInt(parse);
-                    if (!check.contains(num))
-                        check.add(num);
-                    k = 0;
-                    j++;
-                    if (j == allTokimons[i].getTeam().size()) {
-                        if (i == allTokimons.length - 1)
-                            break;
-                        i++;
-                        j = 0;
+                id.add(toki.getId());
+
+            }
+
+            for (ArrayList<String> checker : ids) {
+
+                for (String toki : id) {
+                    if (checker.contains(toki))
+                        check++;
+                }
+
+                if (check != 0 && check != checker.size()) {
+                    System.out.println(" Error: Wrong json files");
+                    System.exit(-1);
+                }
+
+                if (check != 0)
+                    equal++;
+
+                check = 0;
+
+            }
+
+            if (equal == 0)
+                ids.add(id);
+
+            equal = 0;
+        }
+
+        int numFile;
+
+        for (ArrayList<String> checker : ids) {
+
+            check = 0;
+            numFile = checker.size() * checker.size();
+
+            for (JsonTTeam fileTeam : allTokimons) {
+
+                id = new ArrayList<>();
+
+                for (Tokimon toki : fileTeam.getTeam()) {
+
+                    id.add(toki.getId());
+
+                }
+
+                for (String each : id) {
+                    for (String toki : checker) {
+
+                        if (each.equalsIgnoreCase(toki))
+                            check++;
+
                     }
-                    team = allTokimons[i].getTeam().get(j).getId();
-                    parse = "";
                 }
 
             }
+
+            if (numFile != check) {
+                System.out.println("Error: Not enough files for Tokemons");
+                System.exit(-1);
+            }
+
         }
 
-        if (check.size() == 0) {
-            System.out.println("Error: No teams identified");
-            return -1;
-        }
-        return check.size();
+        numOfTeams = ids.size();
+
+    }
+
+    // Getter
+    public int getNumOfTeams() {
+        checkError();
+        return numOfTeams;
     }
 
 }

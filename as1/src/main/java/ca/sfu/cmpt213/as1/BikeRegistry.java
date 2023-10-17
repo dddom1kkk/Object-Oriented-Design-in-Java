@@ -1,8 +1,6 @@
 package ca.sfu.cmpt213.as1;
 
-import java.io.*;
 import java.util.*;
-import ca.sfu.cmpt213.as1.Bike;
 
 /**
  * The BikeRegistry class represents bike managing and registration system. All

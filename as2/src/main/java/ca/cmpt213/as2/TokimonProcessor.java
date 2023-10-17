@@ -25,10 +25,8 @@ public class TokimonProcessor {
 		};
 		Queue<File> files = new LinkedList<File>();
 
-		for (File file : folder.listFiles()) {
-			System.out.println(file.getName());
+		for (File file : folder.listFiles())
 			files.add(file);
-		}
 
 		while (!files.isEmpty()) {
 			File file = files.poll();
@@ -41,8 +39,6 @@ public class TokimonProcessor {
 				}
 			}
 		}
-		for (File each : allJson)
-			System.out.println(each.getName());
 		return allJson;
 	}
 
@@ -97,11 +93,7 @@ public class TokimonProcessor {
 		}
 
 		TeamSorter sort = new TeamSorter(allTokimon);
-		if (sort.countTeams() == -1) {
-			System.out.println("Error: Could not read team from ID");
-			System.exit(-1);
-		}
-		System.out.println("this" + sort.countTeams());
+		System.out.println("this " + sort.getNumOfTeams());
 		writeCsv(null, outFolder);
 	}
 }
