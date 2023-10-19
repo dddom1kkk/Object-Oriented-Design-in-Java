@@ -1,7 +1,7 @@
 package ca.cmpt213.as2;
 
 public class Tokimon {
-    public class Compatibility {
+    private class Compatibility {
         private double score;
         private String comment;
 
@@ -15,6 +15,10 @@ public class Tokimon {
         }
 
         public void setScore(double score) {
+            if (score < 0) {
+                System.out.println("Error: Invalid score");
+                System.exit(-1);
+            }
             this.score = score;
         }
 
@@ -36,6 +40,18 @@ public class Tokimon {
         return name;
     }
 
+    public Compatibility getCompatibility() {
+        return compatibility;
+    }
+
+    public double getScore() {
+        return compatibility.getScore();
+    }
+
+    public String getComment() {
+        return compatibility.getComment();
+    }
+
     public void setId(String id) {
         this.id = id;
     }
@@ -44,12 +60,16 @@ public class Tokimon {
         this.name = name;
     }
 
-    public Compatibility getCompatibility() {
-        return compatibility;
-    }
-
     public void setCompatibility(Compatibility compatibility) {
         this.compatibility = compatibility;
+    }
+
+    public void setScore(double score) {
+        compatibility.setScore(score);
+    }
+
+    public void setComment(String comment) {
+        compatibility.setComment(comment);
     }
 
 }
