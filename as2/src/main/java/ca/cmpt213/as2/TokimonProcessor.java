@@ -125,5 +125,6 @@ public class TokimonProcessor {
 
 		TeamSorter sort = new TeamSorter(allTokimon);
 		writeCsv(sort.divideTeams(), outFolder);
+
 	}
 }
