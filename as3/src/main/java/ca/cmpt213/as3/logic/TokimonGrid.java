@@ -23,7 +23,7 @@ public class TokimonGrid {
     public void generateNpcLocations(String[] args) {
         Integer[] npcQuantity = ErrorHandler.checkGetSizes(args);
 
-        // for ()
+        // for () LAST HERE STOPPED
     }
 
     // Getters & Setters
