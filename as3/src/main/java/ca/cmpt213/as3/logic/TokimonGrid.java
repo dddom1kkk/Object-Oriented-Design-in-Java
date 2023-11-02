@@ -30,6 +30,8 @@ public class TokimonGrid {
         userPosition = new NpcPlace(row, column);
     }
 
+    public void 
+
     public void generateNpcLocations(String[] args) {
         Integer[] npcQuantity = ErrorHandler.checkGetSizes(args);
 
