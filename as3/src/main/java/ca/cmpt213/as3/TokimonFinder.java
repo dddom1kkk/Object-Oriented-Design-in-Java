@@ -1,6 +1,10 @@
 package ca.cmpt213.as3;
 
+import java.util.Scanner;
+
 import ca.cmpt213.as3.logic.ErrorHandler;
+import ca.cmpt213.as3.logic.TokimonGrid;
+import ca.cmpt213.as3.logic.UserMoveInput;
 import ca.cmpt213.as3.ui.GridInterface;
 
 /**
@@ -14,9 +18,9 @@ public class TokimonFinder {
 
         ErrorHandler.checkArgs(args);
 
-        GridInterface.showGrid(null);
-
         ErrorHandler.checkGetSizes(args);
+
+        GridInterface.showGrid(UserMoveInput.inputInitialLocation());
 
     }
 

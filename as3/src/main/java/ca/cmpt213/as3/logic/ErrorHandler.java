@@ -15,12 +15,16 @@ public class ErrorHandler {
     public static Integer[] checkGetSizes(String[] args) {
         Integer[] sizes = new Integer[3]; // Details: index 0 = size of Tokimons, index 1 = size of Fokimons, index 2 =
                                           // = cheat is on or off
-        int total = 0;
 
         if (args.length == 0) {
             sizes[0] = 10;
             sizes[1] = 5;
             sizes[2] = 0;
+
+            for (int i = 0; i < sizes.length; i++) {
+                System.out.println(sizes[i]);
+            }
+
             return sizes;
         }
 
@@ -28,6 +32,11 @@ public class ErrorHandler {
 
             sizes[2] = 1;
             fillBothKnown(sizes, args);
+
+            for (int i = 0; i < sizes.length; i++) {
+                System.out.println(sizes[i]);
+            }
+
             return sizes;
 
         }
@@ -35,11 +44,8 @@ public class ErrorHandler {
         else if (args.length == 2) {
 
             int cheatOn = 0;
-
-            for (String option : args) {
-                if (option.equalsIgnoreCase(input[2]))
-                    cheatOn = 1;
-            }
+            if (args[1].equalsIgnoreCase(input[2]))
+                cheatOn = 1;
 
             sizes[2] = cheatOn;
 
@@ -47,17 +53,199 @@ public class ErrorHandler {
 
                 fillBothKnown(sizes, args);
 
+                for (int i = 0; i < sizes.length; i++) {
+                    System.out.println(sizes[i]);
+                }
+
                 return sizes;
+
+            }
+
+            if (cheatOn == 1) {
+
+                if (args[0].startsWith(input[0])) {
+                    sizes[1] = 5;
+
+                    try {
+                        sizes[0] = Integer.parseInt(args[0].substring(input[0].length()));
+
+                        if (sizes[0] > 95 || sizes[0] < 5) {
+                            System.out.println(
+                                    "Error: Invalid argument input quantity. Expected quantity from 5 to 95: 1.--numToki=<quantity> | 2.--numFoki=<quantity>");
+                            System.exit(-1);
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println(
+                                "Error: Invalid argument input quantity. Expected quantity from 5 to 95: 1.--numToki=<quantity> | 2.--numFoki=<quantity>");
+                        System.exit(-1);
+                    }
+
+                    for (int i = 0; i < sizes.length; i++) {
+                        System.out.println(sizes[i]);
+                    }
+
+                    return sizes;
+                }
+
+                if (args[0].startsWith(input[1])) {
+                    sizes[0] = 10;
+
+                    try {
+                        sizes[1] = Integer.parseInt(args[0].substring(input[1].length()));
+
+                        if (sizes[1] > 90 || sizes[1] < 5) {
+                            System.out.println(
+                                    "Error: Invalid argument input quantity. Expected quantity from 5 to 95: 1.--numToki=<quantity> | 2.--numFoki=<quantity>");
+                            System.exit(-1);
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println(
+                                "Error: Invalid argument input quantity. Expected quantity from 5 to 95: 1.--numToki=<quantity> | 2.--numFoki=<quantity>");
+                        System.exit(-1);
+                    }
+
+                    for (int i = 0; i < sizes.length; i++) {
+                        System.out.println(sizes[i]);
+                    }
+
+                    return sizes;
+                }
 
             }
 
         }
 
-        for (int i = 0; i < sizes.length; i++) {
-            System.out.println(sizes[i]);
+        if (args.length == 1) {
+
+            if (args[0].equalsIgnoreCase(input[2])) {
+                sizes[0] = 10;
+                sizes[1] = 5;
+                sizes[2] = 1;
+
+                for (int i = 0; i < sizes.length; i++) {
+                    System.out.println(sizes[i]);
+                }
+
+                return sizes;
+            }
+
+            if (args[0].startsWith(input[0])) {
+                sizes[1] = 5;
+                sizes[2] = 0;
+
+                try {
+                    sizes[0] = Integer.parseInt(args[0].substring(input[0].length()));
+
+                    if (sizes[1] > 95 || sizes[1] < 5) {
+                        System.out.println(
+                                "Error: Invalid argument input quantity. Expected quantity from 5 to 95: 1.--numToki=<quantity> | 2.--numFoki=<quantity>");
+                        System.exit(-1);
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println(
+                            "Error: Invalid argument input quantity. Expected quantity from 5 to 95: 1.--numToki=<quantity> | 2.--numFoki=<quantity>");
+                    System.exit(-1);
+                }
+
+                for (int i = 0; i < sizes.length; i++) {
+                    System.out.println(sizes[i]);
+                }
+
+                return sizes;
+            }
+
+            if (args[0].startsWith(input[1])) {
+                sizes[0] = 10;
+                sizes[2] = 0;
+
+                try {
+                    sizes[1] = Integer.parseInt(args[0].substring(input[1].length()));
+
+                    if (sizes[1] > 90 || sizes[1] < 5) {
+                        System.out.println(
+                                "Error: Invalid argument input quantity. Expected quantity from 5 to 95: 1.--numToki=<quantity> | 2.--numFoki=<quantity>");
+                        System.exit(-1);
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println(
+                            "Error: Invalid argument input quantity. Expected quantity from 5 to 95: 1.--numToki=<quantity> | 2.--numFoki=<quantity>");
+                    System.exit(-1);
+                }
+
+                for (int i = 0; i < sizes.length; i++) {
+                    System.out.println(sizes[i]);
+                }
+
+                return sizes;
+            }
+
         }
 
         return sizes;
+
+    }
+
+    public static int checkGetInitPosition(String in) {
+
+        int colNum;
+
+        if (in.length() >= 2 && in.length() <= 3) {
+            if (in.charAt(0) >= 'A' && in.charAt(0) <= 'A' + 9) {
+                System.out.println(in.charAt(0));
+                try {
+                    colNum = Integer.parseInt(in.substring(1));
+
+                    if (colNum > 0 && colNum < 11)
+                        return colNum;
+                } catch (NumberFormatException e) {
+                    System.out.println(
+                            "\nWrong place specified.\nEnter a letter (row) from 'A' to 'J' following with an integer (column) from 1 to 10.\n");
+                    return -1;
+                }
+            }
+        }
+
+        System.out.println(
+                "\nWrong place specified.\nEnter a letter (row) from 'A' to 'J' following with an integer (column) from 1 to 10.\n");
+
+        return -1;
+
+    }
+
+    public static boolean checkValidMove(TokimonGrid initial, String in) {
+
+        if (in.length() != 1 || in.charAt(0) != 'W' || in.charAt(0) != 'A' || in.charAt(0) != 'S'
+                || in.charAt(0) != 'D') {
+            System.out.println(
+                    "\nWrong input move key specified. Enter W to move up, A to move left, S to move down, D to move right.\n");
+            return false;
+        }
+
+        if (initial.getLetter().charAt(0) == 'A' && in.charAt(0) == 'W') {
+            System.out.println(
+                    "\nWrong input move key specified. Cannot move up.\nEnter W to move up, A to move left, S to move down, D to move right.\n");
+            return false;
+        }
+
+        if (initial.getLetter().charAt(0) == 'A' + 9 && in.charAt(0) == 'S') {
+            System.out.println(
+                    "\nWrong input move key specified. Cannot move down.\nEnter W to move up, A to move left, S to move down, D to move right.\n");
+            return false;
+        }
+
+        if (initial.getNumber() == 1 && in.charAt(0) == 'A') {
+            System.out.println(
+                    "\nWrong input move key specified. Cannot move left.\nEnter W to move up, A to move left, S to move down, D to move right.\n");
+            return false;
+        }
+
+        if (initial.getNumber() == 10 && in.charAt(0) == 'D') {
+            System.out.println(
+                    "\nWrong input move key specified. Cannot move right.\nEnter W to move up, A to move left, S to move down, D to move right.\n");
+            return false;
+        }
+
+        return true;
 
     }
 

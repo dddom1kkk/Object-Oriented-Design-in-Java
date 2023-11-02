@@ -20,7 +20,10 @@ public class GridInterface {
         for (int i = 1; i <= 10; i++) {
             System.out.print(letter++); // row numeration
             for (int j = 1; j <= 10; j++) {
-                System.out.print("  ~");
+                if (i == npc.getLetter().charAt(0) - ('A' - 1) && j == npc.getNumber())
+                    System.out.print("  @");
+                else
+                    System.out.print("  ~");
             }
             System.out.println();
         }
