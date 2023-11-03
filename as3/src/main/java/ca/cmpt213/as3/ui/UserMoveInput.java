@@ -9,6 +9,7 @@ public class UserMoveInput {
 
     public static TokimonGridState inputInitialLocation(Scanner inScan, String[] args) {
 
+        TokimonGridState initial = new TokimonGridState(organizeArgumentInputs(args), "", 0);
         String in;
         int colNum;
 
@@ -22,7 +23,10 @@ public class UserMoveInput {
                 break;
         }
 
-        return new TokimonGridState(organizeArgumentInputs(args), in.substring(0, 1), colNum);
+        initial.changeRow(in.substring(0, 1));
+        initial.changeColumn(colNum);
+
+        return initial;
 
     }
 

@@ -13,9 +13,9 @@ public class GridInterface {
         int choice;
 
         ErrorHandler.checkArgs(args);
-        UserMoveInput.organizeArgumentInputs(args);
 
         TokimonGridState npcs = UserMoveInput.inputInitialLocation(scan, args);
+        npcs.generateNpcLocations();
 
         while (true) {
 
@@ -36,6 +36,8 @@ public class GridInterface {
     private static void showGrid(TokimonGridState npc) {
 
         char letter = 'A';
+
+        System.out.println("\nCurrent Game Grid:");
 
         System.out.print(" "); // column numeration
         for (int i = 1; i <= 10; i++) {
