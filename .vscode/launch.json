@@ -1,0 +1,36 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "BikeRegistry",
+            "request": "launch",
+            "mainClass": "ca.sfu.cmpt213.as1.BikeRegistry",
+            "projectName": "as1"
+        },
+        {
+            "type": "java",
+            "name": "TokimonProcessor",
+            "request": "launch",
+            "mainClass": "ca.cmpt213.as2.TokimonProcessor",
+            "projectName": "as2"
+        },
+        {
+            "type": "java",
+            "name": "TokimonFinder",
+            "request": "launch",
+            "mainClass": "ca.cmpt213.as3.TokimonFinder",
+            "projectName": "as3",
+            "args": "--numToki=95"
+        }
+    ]
+}
