@@ -106,19 +106,29 @@ public class ErrorHandler {
     public static void fillBothKnown(Integer[] sizes, String[] args) {
 
         int total = 0;
+        int index = -1;
+        sizes[0] = 10;
+        sizes[1] = 5;
+        sizes[2] = 0;
 
-        for (int i = 0; i < sizes.length - 1; i++) {
+        for (int i = 0; i < args.length; i++) {
             try {
+                if (!args[i].startsWith(input[2])) {
+                    if (args[i].startsWith(input[0]))
+                        index = 0;
+                    else if (args[i].startsWith(input[1]))
+                        index = 1;
+                    sizes[index] = Integer.parseInt(args[i].substring(input[index].length()));
 
-                sizes[i] = Integer.parseInt(args[i].substring(input[i].length()));
+                    if (sizes[index] > 95 || sizes[index] < 5) {
+                        System.out.println(
+                                "Error: Invalid argument input quantity. Expected quantity from 5 to 95: 1.--numToki=<quantity> | 2.--numFoki=<quantity>");
+                        System.exit(-1);
+                    }
 
-                if (sizes[i] > 95 || sizes[i] < 5) {
-                    System.out.println(
-                            "Error: Invalid argument input quantity. Expected quantity from 5 to 95: 1.--numToki=<quantity> | 2.--numFoki=<quantity>");
-                    System.exit(-1);
-                }
-
-                total += sizes[i];
+                    total += sizes[index];
+                } else
+                    sizes[2] = 1;
 
             } catch (NumberFormatException e) {
                 System.out.println(
@@ -140,7 +150,11 @@ public class ErrorHandler {
         int ans = 0;
 
         try {
-            ans = Integer.parseInt(arg.substring(ErrorHandler.getTokiChecker().length()));
+
+            if (arg.startsWith(input[0]))
+                ans = Integer.parseInt(arg.substring(input[0].length()));
+            if (arg.startsWith(input[1]))
+                ans = Integer.parseInt(arg.substring(input[1].length()));
 
             if (ans > maxEdge || ans < minEdge) {
                 System.out.println(
@@ -151,6 +165,26 @@ public class ErrorHandler {
             System.out.println(
                     "Error: Invalid argument input quantity. Expected quantity from 5 to 95: 1.--numToki=<quantity> | 2.--numFoki=<quantity>");
             System.exit(-1);
+        }
+
+        return ans;
+
+    }
+
+    public static int checkValidSpell(String in) {
+
+        int ans;
+
+        try {
+            ans = Integer.parseInt(in);
+
+            if (ans < 1 || ans > 3) {
+                System.out.println("\nWrong spell chosen. Please choose 1, 2 or 3.");
+                return -1;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("\nWrong spell chosen. Please choose 1, 2 or 3.");
+            return -1;
         }
 
         return ans;
@@ -224,102 +258,41 @@ public class ErrorHandler {
             System.exit(-1);
         }
 
-        if (args.length == 3) {
-            for (int i = 0; i < args.length; i++) {
-                if (!args[i].startsWith(input[i]) || !args[i].contains(input[i])) {
-                    System.out.println(
-                            "Error: Invalid argument input sequence. Expected: --numToki=<quantity>, --numFoki=<quantity>, --check");
-                    System.exit(-1);
-                }
-            }
-            return;
-        }
-
-        if (args.length == 2) {
-            for (int i = 0; i < args.length; i++) {
-                if (!(args[i].startsWith(input[i]) || args[i].startsWith(input[i + 1]))) {
-                    System.out.println(
-                            "Error: Invalid argument input sequence. Expected sequence: 1.--numToki=<quantity> | 2.--numFoki=<quantity> | 3.--check");
-                    System.exit(-1);
-                }
-            }
-            return;
-        }
-
-        boolean checker = false;
-        if (args.length == 1) {
-            for (int i = 0; i < input.length; i++) {
-                if (args[0].startsWith(input[i])) {
-                    checker = !checker;
-                }
-            }
-            if (!checker) {
+        // Check if arguments start appropriately
+        for (int i = 0; i < args.length; i++) {
+            if (!(args[i].startsWith(input[0]) || args[i].startsWith(input[1]) || args[i].startsWith(input[2]))) {
                 System.out.println(
-                        "Error: Invalid argument input sequence. Expected: 1.--numToki=<quantity> | 2.--numFoki=<quantity> | 3.--check");
+                        "Error: Invalid argument input sequence. Expected sequence: 1.--numToki=<quantity> | 2.--numFoki=<quantity> | 3.--check");
                 System.exit(-1);
             }
-            return;
         }
+        return;
 
     }
 
     private static void checkInvalidThree(String[] args) {
 
-        if (args.length == 3) {
-            for (int i = 0; i < input.length - 1; i++) {
-                if (args[i].startsWith(input[i])) {
-                    if (args[i].length() > input[0].length() + 2 || args[i].length() < input[0].length() + 1) {
-                        System.out.println(
-                                "Error: Invalid argument input sequence. Expected: 1.--numToki=<quantity> | 2.--numFoki=<quantity> | 3.--check\nQuantity should be maximum 95");
-                        System.exit(-1);
-                    }
+        // Check if sizes of arguments are appropriate
+        for (int i = 0; i < args.length - 1; i++) {
+            if (args[i].startsWith(input[0])) {
+                if (args[i].length() > input[0].length() + 2 || args[i].length() < input[0].length() + 1) {
+                    System.out.println(
+                            "Error: Invalid argument input sequence. Expected: 1.--numToki=<quantity> | 2.--numFoki=<quantity> | 3.--check\nQuantity should be maximum 95");
+                    System.exit(-1);
                 }
-            }
-            if (args[2].length() != input[2].length()) {
-                System.out.println("Error: Invalid argument input. Expected: '--check' as a 3 argument");
-                System.exit(-1);
-            }
-            return;
-        }
-
-        if (args.length == 2) {
-            for (int i = 0; i < args.length; i++) {
-                if (args[i].startsWith(input[0]) || args[i].startsWith(input[1])) {
-                    if (args[i].length() > input[0].length() + 2 || args[i].length() < input[0].length() + 1) {
-                        System.out.println(
-                                "Error: Invalid argument input sequence. Expected: 1.--numToki=<quantity> | 2.--numFoki=<quantity> | 3.--check\nQuantity should be maximum 95");
-                        System.exit(-1);
-                    }
+            } else if (args[i].startsWith(input[1])) {
+                if (args[i].length() > input[1].length() + 2 || args[i].length() < input[1].length() + 1) {
+                    System.out.println(
+                            "Error: Invalid argument input sequence. Expected: 1.--numToki=<quantity> | 2.--numFoki=<quantity> | 3.--check\nQuantity should be maximum 95");
+                    System.exit(-1);
                 }
-                if (args[i].startsWith(input[2])) {
-                    if (args[i].length() != input[2].length()) {
-                        System.out
-                                .println("Error: Invalid argument input. Expected: '--check' as a " + i + " argument");
-                        System.exit(-1);
-                    }
-                }
-            }
-            return;
-        }
-
-        if (args.length == 1) {
-            for (int i = 0; i < input.length - 1; i++) {
-                if (args[0].startsWith(input[i])) {
-                    if (args[0].length() > input[i].length() + 2 || args[0].length() < input[i].length() + 1) {
-                        System.out.println(
-                                "Error: Invalid argument input sequence. Expected: 1.--numToki=<quantity> | 2.--numFoki=<quantity> | 3.--check\nQuantity should be maximum 95");
-                        System.exit(-1);
-                    }
-                }
-            }
-            if (args[0].startsWith(input[2])) {
-                if (args[0].length() != input[2].length()) {
+            } else if (args[i].startsWith(input[2])) {
+                if (args[i].length() != input[2].length()) {
                     System.out.println(
                             "Error: Invalid argument input sequence. Expected: 1.--numToki=<quantity> | 2.--numFoki=<quantity> | 3.--check\nQuantity should be maximum 95");
                     System.exit(-1);
                 }
             }
-            return;
         }
 
     }

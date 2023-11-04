@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class TokimonGridState {
 
-    private class NpcPlace {
+    public class NpcPlace {
 
         private String row;
         private int column;
@@ -36,7 +36,9 @@ public class TokimonGridState {
     private final int TOKI = 0, FOKI = 1;
 
     private Integer[] sizeNpc;
-    private ArrayList<NpcPlace> collected;
+    private ArrayList<NpcPlace> collectedTokis;
+    private ArrayList<NpcPlace> revealedFokis;
+    private static ArrayList<NpcPlace> checkedLocations;
     private ArrayList<NpcPlace> tokimons;
     private ArrayList<NpcPlace> fokimons;
     private NpcPlace userPosition;
@@ -47,7 +49,9 @@ public class TokimonGridState {
 
     public TokimonGridState(Integer[] sizes, String row, int column) {
         sizeNpc = sizes;
-        collected = new ArrayList<>();
+        collectedTokis = new ArrayList<>();
+        revealedFokis = new ArrayList<>();
+        checkedLocations = new ArrayList<>();
         tokimons = new ArrayList<>();
         fokimons = new ArrayList<>();
         userPosition = new NpcPlace(row, column);
@@ -68,7 +72,6 @@ public class TokimonGridState {
         NpcPlace npc;
 
         for (int i = 0; i < sizeNpc.length - 1; i++) {
-            System.out.println("Wakakaka" + sizeNpc.length);
             for (int j = 0; j < sizeNpc[i]; j++) {
                 npc = new NpcPlace("", -1);
 
@@ -82,17 +85,17 @@ public class TokimonGridState {
                     randomColumn = (int) (Math.random() * 10 + 1);
 
                     for (NpcPlace toki : tokimons)
-                        if ((!toki.retrieveRow().equals(letterNpc)
-                                || toki.retrieveColumn() != randomColumn))
+                        if ((!toki.row.equals(letterNpc)
+                                || toki.column != randomColumn))
                             countDiff++;
                     for (NpcPlace foki : fokimons)
-                        if ((!foki.retrieveRow().equals(letterNpc)
-                                || foki.retrieveColumn() != randomColumn))
+                        if ((!foki.row.equals(letterNpc)
+                                || foki.column != randomColumn))
                             countDiff++;
                 }
 
-                npc.changeRow(letterNpc);
-                npc.changeColumn(randomColumn);
+                npc.row = letterNpc;
+                npc.column = randomColumn;
 
                 if (i == TOKI)
                     tokimons.add(npc);
@@ -101,25 +104,35 @@ public class TokimonGridState {
             }
         }
 
-        System.out.println();
+    }
+
+    public boolean isOnFoki() {
+
+        for (NpcPlace foki : fokimons)
+            if (userPosition.row.equals(foki.row) && userPosition.column == foki.column)
+                return true;
+
+        return false;
+
+    }
+
+    public void visitedLocation() {
         for (NpcPlace toki : tokimons) {
-            System.out.print(toki.retrieveRow());
-            System.out.println(toki.retrieveColumn());
+            if (toki.row.equals(userPosition.row) && toki.column == userPosition.column) {
+                isTokiCatched(userPosition);
+                tokimons.remove(toki);
+                return;
+            }
         }
-        System.out.println();
-        for (NpcPlace foki : fokimons) {
-            System.out.print(foki.retrieveRow());
-            System.out.println(foki.retrieveColumn());
-        }
-
+        checkedLocations.add(new NpcPlace(userPosition.row, userPosition.column));
     }
 
-    public ArrayList<NpcPlace> collectedNumTokis() {
-        return collected;
+    public void changeFokiToRevealed(int indexFoki) {
+        revealedFokis.add(fokimons.remove(indexFoki));
     }
 
-    public void isTokiCatched(NpcPlace catched) {
-        collected.add(catched);
+    private void isTokiCatched(NpcPlace catched) {
+        collectedTokis.add(new NpcPlace(catched.row, catched.column));
     }
 
     // Getters & Setters
@@ -153,6 +166,22 @@ public class TokimonGridState {
 
     public void changeColumn(int column) {
         userPosition.changeColumn(column);
+    }
+
+    public NpcPlace revealUserPosition() {
+        return userPosition;
+    }
+
+    public ArrayList<NpcPlace> retrieveCheckedLocations() {
+        return checkedLocations;
+    }
+
+    public ArrayList<NpcPlace> retrieveCollectedTokis() {
+        return collectedTokis;
+    }
+
+    public ArrayList<NpcPlace> retrieveRevealedFokis() {
+        return revealedFokis;
     }
 
 }
