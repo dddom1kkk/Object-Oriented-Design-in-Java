@@ -30,7 +30,7 @@
             "request": "launch",
             "mainClass": "ca.cmpt213.as3.TokimonFinder",
             "projectName": "as3",
-            "args": "--cheat"
+            "args": "--chea"
         }
     ]
 }
