@@ -1,9 +1,8 @@
 package ca.cmpt213.asn4;
 
-import ca.cmpt213.asn4.ui.GameRunner;
-import javafx.application.Application;
+import ca.cmpt213.asn4.ui.GameUI;
 
-public class GameApplication extends GameRunner {
+public class GameApplication extends GameUI {
 
     public static void main(String[] args) throws Exception {
 
