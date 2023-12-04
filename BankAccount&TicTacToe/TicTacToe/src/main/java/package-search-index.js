@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"m":"ca.cmpt213.as4","l":"ca.cmpt213.asn4"},{"m":"ca.cmpt213.as4","l":"ca.cmpt213.asn4.logic"},{"m":"ca.cmpt213.as4","l":"ca.cmpt213.asn4.ui"}]

@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"ca.cmpt213.asn4.bank","l":"BankAccount"},{"p":"ca.cmpt213.asn4.bank","l":"SavingsAccount"},{"p":"ca.cmpt213.asn4.bank","l":"SavingsAccountTest"}]
