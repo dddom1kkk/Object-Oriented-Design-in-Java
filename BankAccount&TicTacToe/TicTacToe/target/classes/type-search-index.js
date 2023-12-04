@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"ca.cmpt213.asn4.logic","l":"GameEvent"},{"p":"ca.cmpt213.asn4.ui","l":"GameUI"},{"p":"ca.cmpt213.asn4","l":"TicTac"}]
