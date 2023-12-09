@@ -1,0 +1,74 @@
+[
+  {
+    "sid": 6,
+    "name": "Kairat Nurtas",
+    "weight": 47.0,
+    "height": 180,
+    "picture": "https://i.pinimg.com/originals/f2/b9/07/f2b907a791488532ff49aeb5618b934c.jpg",
+    "category": "SSS",
+    "ability": "Ultimate Dancing Ability \u0026 Cringe"
+  },
+  {
+    "sid": 5,
+    "name": "Rickroll guy",
+    "weight": -13.0,
+    "height": 190,
+    "picture": "https://i.pinimg.com/originals/ba/a5/cc/baa5ccc92b6a8fb0e01b1b6b343ddc49.jpg",
+    "category": "S",
+    "ability": "Rickrolls everyone who sees him"
+  },
+  {
+    "sid": 4,
+    "name": "Real Cat",
+    "weight": 5.0,
+    "height": 30,
+    "picture": "https://i.pinimg.com/originals/75/1b/9a/751b9a98a29c605f70ef79db4d8d830d.jpg",
+    "category": "SSS",
+    "ability": "Summons Spiderman using cuteness"
+  },
+  {
+    "sid": 3,
+    "name": "Tyler Durden",
+    "weight": 0.0,
+    "height": 0,
+    "picture": "~",
+    "category": "SSS",
+    "ability": "Can create explosives without getting caught"
+  },
+  {
+    "sid": 1,
+    "name": "Oogway",
+    "weight": 150.0,
+    "height": 170,
+    "picture": "https://i.pinimg.com/originals/4b/ac/89/4bac890f96bba308f6cbdcc8a598f0e5.jpg",
+    "category": "SS",
+    "ability": "M.. Monkey"
+  },
+  {
+    "sid": 0,
+    "name": "Nurdaulet (My Friend)",
+    "weight": 65.0,
+    "height": 176,
+    "picture": "~",
+    "category": "F",
+    "ability": "Lying, scamming, raging"
+  },
+  {
+    "sid": 2,
+    "name": "John Cena",
+    "weight": 100.0,
+    "height": 194,
+    "picture": "https://i.pinimg.com/originals/ad/8a/6c/ad8a6c46a122d1da8c736977b974cef3.gif",
+    "category": "A",
+    "ability": "Learn Chinese somehow"
+  },
+  {
+    "sid": 7,
+    "name": "Me",
+    "weight": 70.0,
+    "height": 176,
+    "picture": "https://i.pinimg.com/564x/16/c0/55/16c055d9dc975a4269a18ee0535f552e.jpg",
+    "category": "S",
+    "ability": "Not suffering from CMPT major"
+  }
+]
